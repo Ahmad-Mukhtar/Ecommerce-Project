@@ -1,0 +1,11 @@
+#id_NUMS_0,#id_NUMS_1,#id_NUMS_2,#id_NUMS_3{
+ display:inline;
+
+}
+
+.setinline
+{
+display:flex;
+margin-left: 10px;
+justify-content: center;
+}
