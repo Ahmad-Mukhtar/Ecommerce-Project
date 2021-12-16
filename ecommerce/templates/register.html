@@ -103,8 +103,8 @@
                   <b style="color : white; ">Account</b>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                  <a class="dropdown-item" href="#">Login</a>
-                  <a class="dropdown-item" href="#">Register</a>
+                  <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                  <a class="dropdown-item" href="{% url 'register' %}">Register</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
@@ -152,7 +152,7 @@
 
                          <div>
                             {% for message in messages %}
-                                <p>{{message}}</p>
+                                <p class="alert alert-{{ message.tags }}">{{message}}</p>
                             {% endfor%}
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="{% static 'myapp/css/style.css' %}">
+      <link rel="stylesheet" href="{% static 'myapp/css/homestyles.css' %}">
     <title>Home Page</title>
   </head>
   <body>
@@ -104,8 +104,8 @@
                   <b style="color : white; ">Account</b>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                  <a class="dropdown-item" href="#">Login</a>
-                  <a class="dropdown-item" href="#">Register</a>
+                  <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                  <a class="dropdown-item" href="{% url 'register' %}">Register</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
@@ -141,15 +141,7 @@
                         <div class="form-group form-check" style=" margin:10px 20px;">
 
                             {{form.NUMS}}
-<!--                          <input type="radio" class="form-check-input" id="exampleCheck1" name="usertype">-->
-<!--                          <label class="form-check-label" for="exampleCheck1">Customer</label>-->
-<!--                            <input type="radio" value="Customer" class="form-check-input" id="exampleCheck2" name="usertype">-->
-<!--                          <label class="form-check-label" for="exampleCheck1">Seller</label>-->
-<!--                            <input type="radio" value="Seller" class="form-check-input" id="exampleCheck3" name="usertype">-->
-<!--                          <label class="form-check-label" for="exampleCheck1">Admin</label>-->
-<!--                            <input type="radio" class="form-check-input" id="exampleCheck4" name="usertype">-->
-<!--                          <label class="form-check-label" for="exampleCheck1">SuperAdmin</label>-->
-                        </div>
+                    </div>
                         <div>
                             {% for message in messages %}
                                 <p class="alert alert-danger">{{message}}</p>

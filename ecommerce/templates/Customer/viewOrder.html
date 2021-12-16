@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Shopping Hut</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="shortcut icon" type="image/x-icon" href="https://themebeyond.com/html/geco/Geco/img/favicon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+		<!-- CSS here -->
+        <link rel="stylesheet" href="https://themebeyond.com/html/geco/Geco/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/admin.css">
+        <link rel="stylesheet" href="https://themebeyond.com/html/geco/Geco/css/responsive.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
+
+ </head>
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+            <div class="header_img">
+                <i class="nav_logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                    </svg>
+                </i>
+            </div>
+        </header>
+        <div class="l-navbar neonBox-red" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="#" class="nav_logo">
+                        <i class='bx bx-home-alt nav_logo-icon'></i> <span class="nav_logo-name">Customer Panel</span>
+                    </a>
+                    <div class="nav_list">
+                        <a href="dashboard.html" class="nav_link active">
+                            <div class="icons-temp">
+                                <i class='bx bx-grid-alt nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Dashboard</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='bx bx-user nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Update Information</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='bx bx-grid-alt nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Display Categories</span>
+                        </a>
+                        <a href="adminProduct.html" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='fa fa-shopping-cart'></i>
+                            </div>
+                            <span class="nav_name">View Orders</span>
+                        </a>
+                         <a href="adminProduct.html" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='fa fa-shopping-cart'></i>
+                            </div>
+                            <span class="nav_name">Proceed to Cart</span>
+                        </a>
+
+                        <a href="adminProduct.html" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='fa fa-comments'></i>
+                            </div>
+                            <span class="nav_name">Post review</span>
+                        </a>
+
+                    </div>
+                </div>  <a href="#" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='bx bx-log-out nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Log Out</span>
+                        </a>
+            </nav>
+        </div>
+
+        <!--Container Main start-->
+        <div class="mainArea" style="color: black;">
+            <div class="container">
+                <div class="row">
+                <div class="col-6">
+                    <br>
+                    <button type="button" style="background-color: #2b75ff; color: #2b75ff; border-radius: 5px; color: white; border:none; padding: 20px; padding-top: 10px; padding-bottom: 10px;"><b>Advanced Search</b></button>
+                </div>
+                <div style="text-align: right;" class="col-6">
+                    <form action="" method="POST">
+                        <br>
+                        <input type="text" placeholder="Search" name="search" style="padding: 10px; border: none; border-radius: 10px; width: 45%;">
+                        <button type="submit" style="padding: 10px; border : 2px solid #2b75ff; background-color: transparent; color: #2b75ff; border-radius: 10px; padding-top: 5px; padding-bottom: 5px;"><b><i class='bx bx-search'></i></b></button>
+                    </form>
+                </div>
+                </div>
+            </div>
+            <br><br>
+            <!--MAIN DATA-->
+            <div style="text-align: center; color : black">
+                <h3 style="color: black;">Your Order Details</h3><br><br><br>
+                <div class="container" >
+                    <div class="row">
+                        <div class="col-sm-4" style="text-align: center;">
+                            <h3 style="color: black;"><b>ID : </b> 23</h3>
+                        </div>
+                        <div class="col-sm-8" style="text-align: center;">
+                            <h3 style="color: black;"><b>Reciever's Address : </b> Johar Town, Lahore</h3>
+                        </div>
+                        <div class="col-sm-12" style="text-align: center;">
+                            <br><br>
+                            <h2 style="color: black"><b>Order Status : </b><span style="color: chartreuse;">Pending</span></h2>
+                        </div>
+                    </div>
+
+                    <br><br><br>
+
+                    <button type="button" style="background-color: red; color: #2b75ff; border-radius: 5px; color: white; border:none; padding: 30px; padding-top: 15px; padding-bottom: 15px;"><b>Cancel Order</b></button>
+                </div>
+            </div>
+            <!--END MAIN DATA-->
+
+        </div>
+
+        <!--Container Main end-->
+        <!-- main-area-end -->
+
+        <!-- Modal -->
+
+		<!-- JS here -->
+        
+        <script src="https://themebeyond.com/html/geco/Geco/js/bootstrap.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+        <script src="product.js"></script>
+    </body>
+</html>

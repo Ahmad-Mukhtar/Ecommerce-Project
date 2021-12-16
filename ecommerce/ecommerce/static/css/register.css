@@ -1,0 +1,65 @@
+.checkout {
+    background-color: black;
+    margin-top: 4%;
+    padding: 5%;
+    z-index: -10 !important;
+}
+body {
+    background-color: #1c181e !important;
+}
+.squareupbox {
+    cursor: default !important;
+    margin-top: -12% !important;
+}
+
+.checkout input {
+    max-width: 100%;
+    max-height: 80%;
+}
+.checkout input::placeholder {
+    color: grey;
+}
+
+.required label:after {
+    content:" *";
+    color: red;
+}
+
+.checkout label {
+    margin-right: 2%;
+    margin-top: 5%;
+}
+.checkout .row {
+    margin-top: 2%;
+}
+  
+.neonBox-red {
+	color: rgb(209, 4, 66) !important;
+	box-shadow:
+	  0 0 7px rgba(238, 55, 95, 0.4),
+	  0 0 10px rgba(230, 54, 107, 0.4),
+	  0 0 21px rgba(199, 38, 91, 0.4),
+	  0 0 42px rgba(192, 5, 46, 0.4),
+	  0 0 82px rgba(168, 2, 66, 0.4),
+	  0 0 92px rgba(109, 2, 38, 0.4),
+	  0 0 102px rgba(51, 1, 14, 0.4),
+	  0 0 151px rgba(22, 0, 7, 0.4) !important;
+  }
+
+.buybutton {
+    margin-left: 42% !important;
+    margin-top: 3% !important;
+}
+
+.logIn,
+.logInText {
+    font-size: 14px;
+    text-align: right !important;
+    margin-left: 70%;
+    margin-bottom: -3%;
+    color: whitesmoke;
+}
+
+.logIn:hover {
+    color: rgb(209, 4, 66);
+}
