@@ -7,6 +7,7 @@ from .forms import CHOICES
 def homepage(request):
     DL = DAL.Dal()
     All_products = DL.getAllProducts()
+    DL.CloseConnection()
     return render(request, 'HomePage.html', {'allproducts': All_products, 'searchresults': "Featured Products"})
 
 
@@ -18,12 +19,13 @@ def search(request):
     search_result = "Search Results"
     if len(All_products) == 0:
         search_result = "No Results Found"
+    DL.CloseConnection()
     return render(request, 'HomePage.html', {'allproducts': All_products, 'searchresults': search_result})
 
 
 def login(request):
     form = CHOICES(request.POST)
-    if not request.session.has_key('customer'):
+    if not request.session.has_key('user'):
         if request.method == 'POST':
             if form.is_valid():
                 user_type = form.cleaned_data.get("NUMS")
@@ -33,8 +35,9 @@ def login(request):
             password = request.POST['password']
             result = Login.validate_login(email, password, user_type)
             if result == 1:
-                request.session['customer'] = email
                 if user_type == 'Customer':
+                    user = Login.getuserinfo(email, password)
+                    request.session['user'] = user.ID
                     return redirect("DashBoard")
                 elif user_type == 'Seller':
                     return redirect("SEllerDashBoard")
@@ -81,13 +84,44 @@ def register(request):
 def userpanel(request):
     DL = DAL.Dal()
     All_products = DL.getAllProducts()
-    if 'customer' in request.session:
+    DL.CloseConnection()
+    if 'user' in request.session:
         return render(request, 'Customer\Panel.html', {'allproducts': All_products})
     else:
         return redirect("login")
 
 
+def UpdateCustomerProfile(request):
+    if 'user' in request.session:
+        if request.method == 'POST':
+            new_name = request.POST['newname']
+            new_email = request.POST['newemail']
+            old_password = request.POST['oldpass']
+            new_password = request.POST['newpass']
+            dal = DAL.Dal()
+            user = dal.getuserinfofromId(int(request.session['user']))
+            if user.password == old_password:
+                if new_name == '':
+                    new_name = user.name
+                if new_email == '':
+                    new_email = user.email
+                if dal.Update_Customer(new_name, new_email, new_password, int(request.session['user'])) == 1:
+                    messages.success(request, "Profile Updated Successfully")
+                else:
+                    messages.warning(request, "Some Error Occured")
+            else:
+                messages.warning(request, "Old Password is Incorrect")
+            dal.CloseConnection()
+            return render(request, 'Customer\profileupdate.html')
+        else:
+            return render(request, 'Customer\profileupdate.html')
+
+
+    else:
+        return redirect("login")
+
+
 def logout(request):
-    if request.session.has_key('customer'):
+    if request.session.has_key('user'):
         request.session.flush()
     return redirect('login')

@@ -48,7 +48,7 @@
                             </div>
                             <span class="nav_name">Dashboard</span>
                         </a>
-                        <a href="#" class="nav_link">
+                        <a href="{% url 'UpdateProfile' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-user nav_icon'></i>
                             </div>
@@ -80,6 +80,13 @@
                             <span class="nav_name">Post review</span>
                         </a>
 
+                        <a href="adminProduct.html" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='bx bx-user nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Delete Account</span>
+                        </a>
+
                     </div>
                 </div>  <a href="{% url 'logout' %}" class="nav_link">
                             <div class="icons-temp">
@@ -95,21 +102,23 @@
             <div class="container">
                 <div class="row">
                 <div class="col-6">
+                    <h2 style="color: black; margin-top:85px;">Our Products</h2>
                     <br>
-                    <button type="button" style="background-color: #2b75ff; color: #2b75ff; border-radius: 5px; color: white; border:none; padding: 20px; padding-top: 10px; padding-bottom: 10px;"><b>Advanced Search</b></button>
                 </div>
-                <div style="text-align: right;" class="col-6">
+                <div style="text-align: right; margin-top:50px;" class="col-6">
                     <form action="" method="POST">
                         <br>
                         <input type="text" placeholder="Search" name="search" style="padding: 10px; border: none; border-radius: 10px; width: 45%;">
                         <button type="submit" style="padding: 10px; border : 2px solid #2b75ff; background-color: transparent; color: #2b75ff; border-radius: 10px; padding-top: 5px; padding-bottom: 5px;"><b><i class='bx bx-search'></i></b></button>
                     </form>
+                    <div>
+                        <button type="button" style="background-color: #2b75ff00;/* color: #2b75ff; *//* border-radius: 18px; *//* color: white; */border:none;/* padding: 20px; *//* padding-top: 10px; *//* padding-bottom: 10px; */margin: 7px 165px;"><b>Advanced Search</b></button>
+                    </div>
                 </div>
                 </div>
             </div>
             <br><br>
 
-            <h2 style="color: black;">Dashboard</h2>
             <br><br><br>
         </div>
 

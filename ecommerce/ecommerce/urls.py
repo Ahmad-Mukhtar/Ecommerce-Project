@@ -9,6 +9,7 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('DashBoard', views.userpanel, name='DashBoard'),
     path('logout', views.logout, name='logout'),
+    path('UpdateProfile',views.UpdateCustomerProfile,name='UpdateProfile')
 
 
 ]

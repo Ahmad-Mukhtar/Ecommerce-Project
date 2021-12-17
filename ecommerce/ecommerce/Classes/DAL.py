@@ -1,5 +1,6 @@
 from .DBCONNECTION import DBConnection
 from .Products import products
+from .Customer import customer
 
 
 class Dal:
@@ -14,15 +15,23 @@ class Dal:
         for product in result:
             prod = products(product[0], product[1], product[2], product[3], product[4], product[5])
             AllProducts.append(prod)
-        self.db.closeConnection()
-
         return AllProducts
 
-    def checkuseremail(self, User_Email):
-        query = "Select Count(email) from Customer_table where Customer_table.email =?"
-        self.db.cursor.execute(query, User_Email)
+    def getuserinfo(self, email, password):
+        query = "select * from Customer_table where Customer_table.email=? and Customer_table.password=?"
+        values = (email, password)
+        self.db.cursor.execute(query, values)
         result = self.db.cursor.fetchone()
-        return result[0]
+        Customer_info = customer(result[0], result[1], result[2], result[4])
+        self.db.closeConnection()
+        return Customer_info
+
+    def getuserinfofromId(self, Cust_Id):
+        query = "select * from Customer_table where Customer_table.CustId=?"
+        self.db.cursor.execute(query, Cust_Id)
+        result = self.db.cursor.fetchone()
+        Customer_info = customer(result[0], result[1], result[2], result[4])
+        return Customer_info
 
     def validate_login(self, username, password, usertype):
         query = """\
@@ -32,7 +41,8 @@ class Dal:
             """
         values = (username, password, usertype)
         result = self.db.executeproc(query, values)
-        self.db.closeConnection()
+        if result != 1:
+            self.db.closeConnection()
         return result
 
     def register(self, username, email, password, DOB, usertype):
@@ -45,3 +55,16 @@ class Dal:
         result = self.db.executeproc(query, values)
         self.db.closeConnection()
         return result
+
+    def Update_Customer(self, username, email, password, cust_id):
+        query = "Update Customer_table set cust_name=?,password=?,email=? where CustId=?"
+        values = (username, password, email, cust_id)
+        self.db.cursor.execute(query, values)
+        self.db.cons.commit()
+        if self.db.cursor.rowcount > 0:
+            return 1
+        else:
+            return 0
+
+    def CloseConnection(self):
+        self.db.closeConnection()
