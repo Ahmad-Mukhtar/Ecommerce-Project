@@ -1,4 +1,7 @@
+import json
+
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .Classes import DAL
 from .forms import CHOICES
@@ -101,14 +104,18 @@ def UpdateCustomerProfile(request):
             dal = DAL.Dal()
             user = dal.getuserinfofromId(int(request.session['user']))
             if user.password == old_password:
-                if new_name == '':
-                    new_name = user.name
-                if new_email == '':
-                    new_email = user.email
-                if dal.Update_Customer(new_name, new_email, new_password, int(request.session['user'])) == 1:
-                    messages.success(request, "Profile Updated Successfully")
+                if old_password == new_password:
+                    if new_name == '':
+                        new_name = user.name
+                    if new_email == '':
+                        new_email = user.email
+                    if dal.Update_Customer(new_name, new_email, new_password, int(request.session['user'])) == 1:
+                        messages.success(request, "Profile Updated Successfully")
+                    else:
+                        messages.warning(request, "Some Error Occured")
                 else:
-                    messages.warning(request, "Some Error Occured")
+                    messages.success(request, "New Password Cannot Be same as Old Password")
+
             else:
                 messages.warning(request, "Old Password is Incorrect")
             dal.CloseConnection()
@@ -119,6 +126,43 @@ def UpdateCustomerProfile(request):
 
     else:
         return redirect("login")
+
+
+def Addtocart(request):
+    response = redirect("DashBoard")
+    val = request.COOKIES.get('prodcookie', 'default')
+    Dl = DAL.Dal()
+    res = None
+    if val != 'default':
+        res = Dl.getCart(int(request.session['user']), int(val))
+    if res is None:
+        result = Dl.addtoCart(int(request.session['user']), int(val))
+        Dl.CloseConnection()
+        if result == 1:
+            print("success")
+    else:
+        print("Failed")
+    return response
+
+
+def DeleteAccount(request):
+    if 'user' in request.session:
+        if request.method == 'POST':
+            password = request.POST['pass']
+            confirm_password = request.POST['confpass']
+            if password != confirm_password:
+                messages.error(request, "Password and Confirm Password does not matches")
+            else:
+                dal = DAL.Dal()
+                user = dal.getuserinfofromId(int(request.session['user']))
+                if user.password != password:
+                    messages.error(request, "Incorrect Password")
+                else:
+                    #TODO
+                    print("Account Deleted Successfully")
+        return render(request, "Customer/DeleteAccount.html")
+    else:
+        return redirect('login')
 
 
 def logout(request):

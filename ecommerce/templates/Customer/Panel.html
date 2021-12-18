@@ -59,7 +59,10 @@
                                 <i class='bx bx-grid-alt nav_icon'></i>
                             </div>
                             <span class="nav_name">Display Categories</span>
+
                         </a>
+
+
                         <a href="adminProduct.html" class="nav_link">
                             <div class="icons-temp">
                                 <i class='fa fa-shopping-cart'></i>
@@ -80,7 +83,7 @@
                             <span class="nav_name">Post review</span>
                         </a>
 
-                        <a href="adminProduct.html" class="nav_link">
+                        <a href="{% url 'DeleteAccount' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-user nav_icon'></i>
                             </div>
@@ -138,9 +141,9 @@
                         </div>
                         <h5 class="mb-0 font-weight-semibold" style="color:black;">Rs {{product.getprice}}</h5>
                         <div class="text-muted mb-3">34 reviews</div>
-                        <a href="{% url 'login' %}">
-                        <button type="button" class="btn bg-cart" value="{{product.prodid}}"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-                        </a>
+
+                        <button type="submit" class="btn bg-cart" value="{{product.prodid}}" onclick="addtocart(this)"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+
                     </div>
                 </div>
             </div>
@@ -248,9 +251,23 @@ type: 'radar',
         <!--Container Main end-->
         <!-- main-area-end -->
 
+<script>
+    function addtocart(prodId)
+    {
+            var d = new Date();
+            d.setTime(d.getTime() + (10*1000));
+            var expires = "expires=" + d.toUTCString();
+            var s = "prodcookie";
+            document.cookie = s + "=" + prodId.value + ";" + expires + ";path=/Addtocart";
+            console.log(document.cookie);
+            var url="{% url 'Addtocart' %}";
+            document.location.href =url
 
+    };
+</script>
 		<!-- JS here -->
         <script src="https://themebeyond.com/html/geco/Geco/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="{% static 'js/product.js' %}"></script>
     </body>
 </html>
