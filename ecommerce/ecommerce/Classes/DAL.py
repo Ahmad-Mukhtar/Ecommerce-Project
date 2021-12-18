@@ -83,11 +83,36 @@ class Dal:
         result = self.db.cursor.fetchone()
         return result
 
+    def Remove_From_Cart(self, Cust_Id,Prod_id):
+        query = "Delete from Cart where customerId=? and productId=?"
+        values=(Cust_Id,Prod_id)
+        self.db.cursor.execute(query, values)
+        self.db.cons.commit()
+        if self.db.cursor.rowcount > 0:
+            return 1
+        else:
+            return 0
+
     def getCartitemslength(self, Cust_Id):
         query = "select * from Cart where customerId=?"
         self.db.cursor.execute(query, Cust_Id)
-        result = self.db.cursor.fetchone()
+        result = self.db.cursor.fetchall()
         return len(result)
+
+    def getCartitems(self, Cust_Id):
+        query = "select * from Cart where customerId=?"
+        self.db.cursor.execute(query, Cust_Id)
+        cart_table = self.db.cursor.fetchall()
+        AllProducts = []
+        print(cart_table)
+
+        for item in cart_table:
+            query = "Select * from products where prodId=?"
+            self.db.cursor.execute(query, item[0])
+            result = self.db.cursor.fetchall()
+            prod = products(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4], result[0][5])
+            AllProducts.append(prod)
+        return AllProducts
 
     def deleteAccount(self, cusid):
         query = "Delete From Customer_table where CustId=?"

@@ -1,8 +1,6 @@
-import json
-
 from django.contrib import messages
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
 from .Classes import DAL
 from .forms import CHOICES
 
@@ -87,10 +85,10 @@ def register(request):
 def userpanel(request):
     DL = DAL.Dal()
     All_products = DL.getAllProducts()
-    items_count =DL.getCartitemslength(int(request.session['user']))
+    items_count = DL.getCartitemslength(int(request.session['user']))
     DL.CloseConnection()
     if 'user' in request.session:
-        messages.success(request,str(items_count))
+        messages.success(request, str(items_count))
         return render(request, 'Customer\Panel.html', {'allproducts': All_products})
     else:
         return redirect("login")
@@ -134,6 +132,38 @@ def UpdateCustomerProfile(request):
         return redirect("login")
 
 
+def Categories(request):
+    if 'user' in request.session:
+        return render(request, 'Customer/Categories.html')
+    else:
+        return redirect('login')
+
+
+def Cart(request):
+    if 'user' in request.session:
+        Dl = DAL.Dal()
+        All_products = Dl.getCartitems(int(request.session['user']))
+        total_sum = 0
+        for prod in All_products:
+            total_sum = total_sum + prod.getprice()
+
+        return render(request, 'Customer/Cart.html',
+                      {'cartproducts': All_products, 'Totalsum': total_sum, 'Sumwithshipping': total_sum + 50})
+    else:
+        return redirect('login')
+
+
+def removefromcart(request):
+    if 'user' in request.session:
+        if request.method == 'POST':
+            prodid = request.POST['productid']
+            Dl = DAL.Dal()
+            Dl.Remove_From_Cart(int(request.session['user']), int(prodid))
+            return redirect("Cart")
+    else:
+        return redirect('login')
+
+
 def Addtocart(request):
     response = redirect("DashBoard")
     val = request.COOKIES.get('prodcookie', 'default')
@@ -143,10 +173,10 @@ def Addtocart(request):
         res = Dl.getCart(int(request.session['user']), int(val))
     if res is None:
         result = Dl.addtoCart(int(request.session['user']), int(val))
-        items_count=1+Dl.getCartitemslength(int(request.session['user']))
+        items_count = Dl.getCartitemslength(int(request.session['user']))
         Dl.CloseConnection()
         if result == 1:
-            messages.success(request,str(items_count))
+            messages.success(request, str(items_count))
             print("success")
     else:
         print("Failed")

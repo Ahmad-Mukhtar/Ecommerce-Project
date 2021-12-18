@@ -12,7 +12,8 @@ urlpatterns = [
     path('UpdateProfile',views.UpdateCustomerProfile,name='UpdateProfile'),
     path('Addtocart', views.Addtocart, name='Addtocart'),
     path('DeleteAccount', views.DeleteAccount, name='DeleteAccount'),
-
-
+    path('Categories', views.Categories, name='Categories'),
+    path('Cart', views.Cart, name='Cart'),
+    path('removefromcart', views.removefromcart, name='removefromcart'),
 
 ]
