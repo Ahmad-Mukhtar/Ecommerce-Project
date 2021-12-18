@@ -1,0 +1,269 @@
+﻿<!doctype html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Shopping Hut</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="shortcut icon" type="image/x-icon" href="https://themebeyond.com/html/geco/Geco/img/favicon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+		<!-- CSS here -->
+        <link rel="stylesheet" href="https://themebeyond.com/html/geco/Geco/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+        <link rel="stylesheet" href="https://themebeyond.com/html/geco/Geco/css/responsive.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
+
+ </head>
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+            <div class="header_img">
+                <i class="nav_logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                    </svg>
+                </i>
+            </div>
+        </header>
+        <div class="l-navbar neonBox-red" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="#" class="nav_logo">
+                        <i class='bx bx-home-alt nav_logo-icon'></i> <span class="nav_logo-name">Customer Panel</span>
+                    </a>
+                    <div class="nav_list">
+
+                        <a href="dashboard.html" class="nav_link active">
+                            <div class="icons-temp">
+                                <i class='bx bx-grid-alt nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Dashboard</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='bx bx-user nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Update Information</span>
+                        </a>
+                        <a href="#" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='bx bx-grid-alt nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Display Categories</span>
+                        </a>
+                        <a href="adminProduct.html" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='fa fa-shopping-cart'></i>
+                            </div>
+                            <span class="nav_name">View Orders</span>
+                        </a>
+                        <a href="adminProduct.html" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='fa fa-shopping-cart'></i>
+                            </div>
+                            <span class="nav_name">Proceed to Cart</span>
+                        </a>
+
+                        <a href="adminProduct.html" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='fa fa-comments'></i>
+                            </div>
+                            <span class="nav_name">Post review</span>
+                        </a>
+
+
+
+
+
+
+                    </div>
+                </div>  <a href="#" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='bx bx-log-out nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Log Out</span>
+                        </a>
+            </nav>
+        </div>
+
+        <!--Container Main start-->
+        <div class="mainArea" style="color: black;">
+            <div class="container">
+                <div style="text-align: right;">
+                    <form action="" method="POST">
+                        <br>
+                        <input type=hidden placeholder="Search" name="search" style="padding: 10px; border: none; border-radius: 10px; width: 25%;">
+                    </form>
+                </div>
+                </div>
+
+                <section id="top" style=" padding-bottom:120px;margin-top:30px; margin-bottom:10px;  color: #000000; font-style: normal;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-8">
+
+                                <h1 style="  text-align:center ; color:black; font-family: 'Open Sans', sans-serif;"> Delete Account</h1>
+                                <hr style="height:2px;border-width:0;color:gray;background-color:gray ;  margin-top:30px; ">
+
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-8">
+
+                                    <form action="DeleteAccount" method="POST">
+                                                     {% csrf_token %}
+                                <br><br>
+
+                                <b style="font-size:24px; ">Enter Password</b>
+                                <br><br>
+
+                                <input type="password" id="pass" name="pass" style=" word-wrap: break-word; box-sizing: border-box; margin: 0; font: inherit; font-family: inherit; font-size: inherit; line-height: inherit; border-radius: 3px; background-color: #ececec; border: 1px solid transparent; color: #3d3d3d; width: 50%; padding: 10px;">
+
+
+                                <br><br>
+
+                                <b style="font-size:24px; ">Confirm Password</b>
+                                <br><br>
+
+                                <input type="password" id="c_pass" name="confpass" style=" word-wrap: break-word; box-sizing: border-box; margin: 0; font: inherit; font-family: inherit; font-size: inherit; line-height: inherit; border-radius: 3px; background-color: #ececec; border: 1px solid transparent; color: #3d3d3d; width: 50%; padding: 10px;">
+
+                                <br><br>
+                                    <div class="done" style="margin-left:60px;">
+
+                                        <div>
+                            {% for message in messages %}
+                                <p class="alert alert-danger" style="width:50%; width: 55%;margin-left: -57px;">{{message}}</p>
+                            {% endfor%}
+                        </div>
+
+                                        <button type="submit" style=" width:150px;background-color: #2b75ff; color: #2b75ff; border-radius: 5px; color: white; border:none; padding: 20px; padding-top: 10px; padding-bottom: 10px;margin-left:-56px;"><b>Delete</b></button>
+
+
+                                    </div>
+                                    </form>
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                <br><br><br><br>
+            
+
+            </div>
+            <br><br>
+            
+<script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+const data = {
+  labels: [
+    'Eating',
+    'Drinking',
+    'Sleeping',
+    'Designing',
+    'Coding',
+    'Cycling',
+    'Running'
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [65, 59, 90, 81, 56, 55, 40],
+    fill: true,
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgb(255, 99, 132)',
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(255, 99, 132)'
+  }, {
+    label: 'My Second Dataset',
+    data: [28, 48, 40, 19, 96, 27, 100],
+    fill: true,
+    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    borderColor: 'rgb(54, 162, 235)',
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(54, 162, 235)'
+  }]
+};
+
+const ctx1 = document.getElementById('myChart1').getContext('2d');
+const myChart1 = new Chart(ctx1, {
+type: 'radar',
+  data: data,
+  options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
+    }
+  },
+});
+</script>
+        <!--Container Main end-->
+        <!-- main-area-end -->
+
+
+		<!-- JS here -->
+        <script src="https://themebeyond.com/html/geco/Geco/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/product.js' %}"></script>
+    </body>
+</html>
