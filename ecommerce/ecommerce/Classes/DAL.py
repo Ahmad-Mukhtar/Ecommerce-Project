@@ -83,6 +83,12 @@ class Dal:
         result = self.db.cursor.fetchone()
         return result
 
+    def getCartitemslength(self, Cust_Id):
+        query = "select * from Cart where customerId=?"
+        self.db.cursor.execute(query, Cust_Id)
+        result = self.db.cursor.fetchone()
+        return len(result)
+
     def deleteAccount(self, cusid):
         query = "Delete From Customer_table where CustId=?"
         self.db.cursor.execute(query, cusid)
@@ -91,6 +97,17 @@ class Dal:
             return 1
         else:
             return 0
+
+    def getAlluseremails(self):
+        query = "Select email from Customer_table"
+        self.db.cursor.execute(query)
+        result = self.db.cursor.fetchall()
+        Allemails = []
+        for mail in result:
+            Allemails.append(mail[0])
+        return Allemails
+
+
 
     def CloseConnection(self):
         self.db.closeConnection()

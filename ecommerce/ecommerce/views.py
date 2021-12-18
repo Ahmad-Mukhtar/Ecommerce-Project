@@ -87,8 +87,10 @@ def register(request):
 def userpanel(request):
     DL = DAL.Dal()
     All_products = DL.getAllProducts()
+    items_count =DL.getCartitemslength(int(request.session['user']))
     DL.CloseConnection()
     if 'user' in request.session:
+        messages.success(request,str(items_count))
         return render(request, 'Customer\Panel.html', {'allproducts': All_products})
     else:
         return redirect("login")
@@ -104,17 +106,21 @@ def UpdateCustomerProfile(request):
             dal = DAL.Dal()
             user = dal.getuserinfofromId(int(request.session['user']))
             if user.password == old_password:
-                if old_password == new_password:
-                    if new_name == '':
-                        new_name = user.name
-                    if new_email == '':
-                        new_email = user.email
-                    if dal.Update_Customer(new_name, new_email, new_password, int(request.session['user'])) == 1:
-                        messages.success(request, "Profile Updated Successfully")
+                if old_password != new_password:
+
+                    if new_email not in dal.getAlluseremails() or user.email == new_email:
+                        if new_name == '':
+                            new_name = user.name
+                        if new_email == '':
+                            new_email = user.email
+                        if dal.Update_Customer(new_name, new_email, new_password, int(request.session['user'])) == 1:
+                            messages.success(request, "Profile Updated Successfully")
+                        else:
+                            messages.warning(request, "Some Error Occured")
                     else:
-                        messages.warning(request, "Some Error Occured")
+                        messages.warning(request, "This Email is Already Registered")
                 else:
-                    messages.success(request, "New Password Cannot Be same as Old Password")
+                    messages.warning(request, "New Password Cannot Be same as Old Password")
 
             else:
                 messages.warning(request, "Old Password is Incorrect")
@@ -137,8 +143,10 @@ def Addtocart(request):
         res = Dl.getCart(int(request.session['user']), int(val))
     if res is None:
         result = Dl.addtoCart(int(request.session['user']), int(val))
+        items_count=1+Dl.getCartitemslength(int(request.session['user']))
         Dl.CloseConnection()
         if result == 1:
+            messages.success(request,str(items_count))
             print("success")
     else:
         print("Failed")
