@@ -66,7 +66,6 @@ class Dal:
         else:
             return 0
 
-
     def Update_Customer(self, username, email, password, cust_id):
         query = "Update Customer_table set cust_name=?,password=?,email=? where CustId=?"
         values = (username, password, email, cust_id)
@@ -83,6 +82,15 @@ class Dal:
         self.db.cursor.execute(query, values)
         result = self.db.cursor.fetchone()
         return result
+
+    def deleteAccount(self, cusid):
+        query = "Delete From Customer_table where CustId=?"
+        self.db.cursor.execute(query, cusid)
+        self.db.cons.commit()
+        if self.db.cursor.rowcount > 0:
+            return 1
+        else:
+            return 0
 
     def CloseConnection(self):
         self.db.closeConnection()

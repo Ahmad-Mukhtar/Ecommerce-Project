@@ -158,8 +158,9 @@ def DeleteAccount(request):
                 if user.password != password:
                     messages.error(request, "Incorrect Password")
                 else:
-                    #TODO
-                    print("Account Deleted Successfully")
+                    dal.deleteAccount(int(request.session['user']))
+                    request.session.flush()
+                    return redirect('login')
         return render(request, "Customer/DeleteAccount.html")
     else:
         return redirect('login')
