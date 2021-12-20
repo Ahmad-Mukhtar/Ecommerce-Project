@@ -11,7 +11,6 @@ def homepage(request):
     DL.CloseConnection()
     return render(request, 'HomePage.html', {'allproducts': All_products, 'searchresults': "Featured Products"})
 
-
 def search(request):
     DL = DAL.Dal()
     All_products = DL.getAllProducts()
@@ -22,6 +21,78 @@ def search(request):
         search_result = "No Results Found"
     DL.CloseConnection()
     return render(request, 'HomePage.html', {'allproducts': All_products, 'searchresults': search_result})
+
+def searchinpanel(request):
+    if 'user' in request.session:
+        DL = DAL.Dal()
+        All_products = DL.getAllProducts()
+        search_value = request.GET['searchbox']
+        All_products = [x for x in All_products if x.prodname.find(search_value) != -1]
+        search_result = "Search Results"
+        if len(All_products) == 0:
+            search_result = "No Results Found"
+        items_count = DL.getCartitemslength(int(request.session['user']))
+        messages.success(request, str(items_count))
+
+        DL.CloseConnection()
+        return render(request, 'Customer\Panel.html', {'allproducts': All_products, 'SearchValue': search_result})
+    else:
+        return redirect("login")
+
+
+def AdvancedSearch(request):
+    if 'user' in request.session:
+        if request.method == 'POST':
+            filtered_products = []
+            all_letters = request.POST['Allletters']
+            exact_letters = request.POST['exactletters']
+            any_letters = request.POST['anyletter']
+            DL = DAL.Dal()
+            All_products = DL.getAllProducts()
+            if any_letters == '':
+                any_letters = "#"
+            if exact_letters == '':
+                exact_letters = "#"
+            if all_letters == '':
+                all_letters = "#"
+            for product in All_products:
+                print(exact_letters, product.prodname)
+                if product.prodname.lower().find(
+                        any_letters.lower()) != -1 or product.prodname.lower() == exact_letters.lower():
+                    filtered_products.append(product)
+
+                else:
+                    for letter in all_letters:
+                        if letter.lower() in product.prodname.lower():
+                            filtered_products.append(product)
+                            break
+            search_result = "Search Results"
+            if len(All_products) == 0:
+                search_result = "No Results Found"
+            items_count = DL.getCartitemslength(int(request.session['user']))
+            messages.success(request, str(items_count))
+            DL.CloseConnection()
+            return render(request, 'Customer\Panel.html',
+                          {'allproducts': filtered_products, 'SearchValue': search_result})
+        else:
+            return render(request, 'Customer/advancedSearch.html')
+    else:
+        return redirect('login')
+
+
+def searchbycategory(request):
+    val = request.COOKIES.get('catcookie', 'default')
+    Dl = DAL.Dal()
+    result = []
+    if val != 'default':
+        result = Dl.getAllProducts()
+        result = [x for x in result if x.category.find(val) != -1]
+        items_count = Dl.getCartitemslength(int(request.session['user']))
+        messages.success(request, str(items_count))
+        Dl.CloseConnection()
+    else:
+        print("Failed")
+    return render(request, 'Customer\Panel.html', {'allproducts': result, 'SearchValue': val})
 
 
 def login(request):
@@ -89,7 +160,7 @@ def userpanel(request):
     DL.CloseConnection()
     if 'user' in request.session:
         messages.success(request, str(items_count))
-        return render(request, 'Customer\Panel.html', {'allproducts': All_products})
+        return render(request, 'Customer\Panel.html', {'allproducts': All_products, 'SearchValue': "Our Products"})
     else:
         return redirect("login")
 
@@ -181,6 +252,63 @@ def Addtocart(request):
     else:
         print("Failed")
     return response
+
+
+def checkout(request):
+    if 'user' in request.session:
+        val = str(request.COOKIES.get('cartprodts', 'default'))
+        subtotal = 0
+        if val != 'default':
+            cart_products = filterstring(val)
+            if request.method=='POST':
+                street_addr = request.POST['st_address']
+                city = request.POST['city']
+                phone = request.POST['Phone']
+
+                Full_addr=street_addr+"  "+city
+                #get value and insert order
+                Dl=DAL.Dal()
+                price_index=len(cart_products)-1
+                order_id=Dl.addorder(int(request.session['user']),Full_addr,int(phone),'Pending Confirmation',cart_products[price_index])
+                for i in range(price_index):
+                    Dl.addorderdetails(order_id,cart_products[i])
+                return redirect('manageorders')
+            else:
+                subtotal = cart_products[len(cart_products) - 1]
+        else:
+            print("Failed")
+        return render(request, "Customer/Checkout.html", {'subtotal': subtotal - 50, 'Total': subtotal})
+    else:
+        return redirect('login')
+
+
+def filterstring(str):
+    tempstr = ""
+    lis = []
+    price_ind = 0
+    for x in range(len(str)):
+        if str[x] != ',':
+            tempstr = tempstr + str[x]
+        elif str[x + 1] != ',':
+            lis.append(int(tempstr))
+            tempstr = ""
+        else:
+            lis.append(int(tempstr))
+            price_ind = x + 2
+            break
+    tempstr = ""
+    for x in range(price_ind, len(str)):
+        tempstr = tempstr + str[x]
+
+    lis.append(int(tempstr))
+    return lis
+
+
+def manageorders(request):
+    if 'user' in request.session:
+        return render(request, "Customer/manageOrder.html")
+    else:
+        return redirect('login')
 
 
 def DeleteAccount(request):

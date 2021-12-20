@@ -10,7 +10,6 @@ class DBConnection:
     def executeproc(self, query, values):
         self.cursor.execute(query, values)
         flag = self.cursor.fetchone()
-        print(flag)
         return flag[0]
 
     def closeConnection(self):

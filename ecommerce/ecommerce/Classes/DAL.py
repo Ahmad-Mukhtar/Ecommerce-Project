@@ -99,12 +99,31 @@ class Dal:
         result = self.db.cursor.fetchall()
         return len(result)
 
+    def addorder(self,cust_id,addr,phoneno,order_status,price):
+        proc_query = """\
+                   DECLARE @out int;
+                    EXEC [dbo].[insert_order] @cust_id= ?,@addr=?,@status=?,@phno=?,@price=?, @flag=@out OUTPUT;
+                    SELECT @out AS the_output;
+                   """
+        values = (cust_id,addr,order_status,phoneno,price)
+        result = self.db.executeproc(proc_query, values)
+        return result
+
+    def addorderdetails(self,order_id,product_id):
+        query = "Insert into orders values(?,?)"
+        values = (order_id, product_id)
+        self.db.cursor.execute(query, values)
+        self.db.cons.commit()
+        if self.db.cursor.rowcount > 0:
+            return 1
+        else:
+            return 0
+
     def getCartitems(self, Cust_Id):
         query = "select * from Cart where customerId=?"
         self.db.cursor.execute(query, Cust_Id)
         cart_table = self.db.cursor.fetchall()
         AllProducts = []
-        print(cart_table)
 
         for item in cart_table:
             query = "Select * from products where prodId=?"
@@ -131,8 +150,6 @@ class Dal:
         for mail in result:
             Allemails.append(mail[0])
         return Allemails
-
-
 
     def CloseConnection(self):
         self.db.closeConnection()

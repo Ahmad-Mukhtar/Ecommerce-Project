@@ -69,7 +69,7 @@
                         </a>
 
 
-                        <a href="adminProduct.html" class="nav_link">
+                        <a href="{% url 'manageorders' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='fa fa-shopping-cart'></i>
                             </div>
@@ -105,17 +105,19 @@
             <div class="container">
                 <div class="row">
                 <div class="col-6">
-                    <h2 style="color: black; margin-top:85px;">Our Products</h2>
+                    <h2 style="color: black; margin-top:85px;">{{SearchValue}}</h2>
                     <br>
                 </div>
                 <div style="text-align: right; margin-top:50px;" class="col-6">
-                    <form action="" method="POST">
+                    <form action="searchinpanel" method="get">
                         <br>
-                        <input type="text" placeholder="Search" name="search" style="padding: 10px; border: none; border-radius: 10px; width: 45%;">
-                        <button type="submit" style="padding: 10px; border : 2px solid #2b75ff; background-color: transparent; color: #2b75ff; border-radius: 10px; padding-top: 5px; padding-bottom: 5px;"><b><i class='bx bx-search'></i></b></button>
+                        <input type="text" placeholder="Search" name="searchbox" style="padding: 10px; border: none; border-radius: 10px; width: 45%;">
+                        <button type="submit" class="point" style="padding: 10px; border : 2px solid #2b75ff; background-color: transparent; color: #2b75ff; border-radius: 10px; padding-top: 5px; padding-bottom: 5px;"><b><i class='bx bx-search'></i></b></button>
                     </form>
                     <div>
-                        <button type="button" style="background-color: #2b75ff00;/* color: #2b75ff; *//* border-radius: 18px; *//* color: white; */border:none;/* padding: 20px; *//* padding-top: 10px; *//* padding-bottom: 10px; */margin: 7px 165px;"><b>Advanced Search</b></button>
+                            <a href="{% url 'AdvancedSearch' %}">
+                        <button type="button" class="point" style="background-color: #2b75ff00;/* color: #2b75ff; *//* border-radius: 18px; *//* color: white; */border:none;/* padding: 20px; *//* padding-top: 10px; *//* padding-bottom: 10px; */margin: 7px 165px;"><b>Advanced Search</b></button>
+                        </a>
                     </div>
                 </div>
                 </div>

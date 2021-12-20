@@ -15,5 +15,10 @@ urlpatterns = [
     path('Categories', views.Categories, name='Categories'),
     path('Cart', views.Cart, name='Cart'),
     path('removefromcart', views.removefromcart, name='removefromcart'),
+    path('searchedcategory',views.searchbycategory,name='searchedcategory'),
+    path('searchinpanel',views.searchinpanel,name='searchinpanel'),
+    path('AdvancedSearch', views.AdvancedSearch, name='AdvancedSearch'),
+    path('checkout', views.checkout, name='checkout'),
+    path('manageorders', views.manageorders, name='manageorders')
 
 ]

@@ -1,4 +1,5 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -12,8 +13,8 @@
 
 		<!-- CSS here -->
         <link rel="stylesheet" href="https://themebeyond.com/html/geco/Geco/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/admin.css">
+        <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="https://themebeyond.com/html/geco/Geco/css/responsive.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
@@ -92,100 +93,27 @@
         <!--Container Main start-->
         <div class="mainArea" style="color: black;">
             <div class="container"><br><br><br>
-                <h2 style="color: black;">John's Order List</h2><br><br><br>
+                <h2 style="color: black;">Order List</h2><br><br><br>
                 <table class="table table-dark table-striped">
                     <thead>
                         <tr>
                           <th scope="col">ID</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Email</th>
-                          <th scope="col">Actions</th>
+                          <th scope="col">Products</th>
+                          <th scope="col">Total Price</th>
+                          <th scope="col">Order Status</th>
+                          <th scope="col"> </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <th scope="row">1</th>
-                          <td>Mark</td>
+                          <td style="overflow: auto;width: 201px;word-break: break-all;">Mark</td>
                           <td>Otto</td>
                           <td>@mdo</td>
-                          <td><a href="manageOrder.html"><i class='bx bxs-show'></i></a>
-                          <a href="manageOrder.html"><i class='bx bxs-no-entry'></i></a></td>
+                          <td><a href="manageOrder.html"><button type="submit" class="point" style="background-color: #bf1c3d;border-radius: 29px;color: white;border:none;padding: 3px 16px;margin-right: -67px;"><b>Cancel Order</b></button></a>
                         </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                          <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td colspan="2">Larry the Bird</td>
-                          <td>@twitter</td>
-                          <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                          </tr>
-                          <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                              <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                            </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                              <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td colspan="2">Larry the Bird</td>
-                              <td>@twitter</td>
-                              <td><a href="manageOrder.html"><i class='bx bxs-edit'></i></a></td>
-                            </tr>
-                            
+
+
                       </tbody>
                   </table>
             </div>
@@ -280,6 +208,7 @@ type: 'radar',
 
 		<!-- JS here -->
         <script src="https://themebeyond.com/html/geco/Geco/js/bootstrap.min.js"></script>
-        <script src="product.js"></script>
+            <script src="{% static 'js/product.js' %}"></script>
+
     </body>
 </html>
