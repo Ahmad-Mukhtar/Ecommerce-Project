@@ -19,6 +19,8 @@ urlpatterns = [
     path('searchinpanel',views.searchinpanel,name='searchinpanel'),
     path('AdvancedSearch', views.AdvancedSearch, name='AdvancedSearch'),
     path('checkout', views.checkout, name='checkout'),
-    path('manageorders', views.manageorders, name='manageorders')
+    path('manageorders', views.manageorders, name='manageorders'),
+    path('cancelorder', views.cancelorder, name='cancelorder'),
+    path('addeditreview', views.addeditreview, name='addeditreview'),
 
 ]

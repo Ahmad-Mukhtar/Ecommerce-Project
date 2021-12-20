@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 
 from .Classes import DAL
 from .forms import CHOICES
+from .Classes.Button import Btn
 
 
 def homepage(request):
@@ -10,6 +11,7 @@ def homepage(request):
     All_products = DL.getAllProducts()
     DL.CloseConnection()
     return render(request, 'HomePage.html', {'allproducts': All_products, 'searchresults': "Featured Products"})
+
 
 def search(request):
     DL = DAL.Dal()
@@ -21,6 +23,7 @@ def search(request):
         search_result = "No Results Found"
     DL.CloseConnection()
     return render(request, 'HomePage.html', {'allproducts': All_products, 'searchresults': search_result})
+
 
 def searchinpanel(request):
     if 'user' in request.session:
@@ -81,18 +84,21 @@ def AdvancedSearch(request):
 
 
 def searchbycategory(request):
-    val = request.COOKIES.get('catcookie', 'default')
-    Dl = DAL.Dal()
-    result = []
-    if val != 'default':
-        result = Dl.getAllProducts()
-        result = [x for x in result if x.category.find(val) != -1]
-        items_count = Dl.getCartitemslength(int(request.session['user']))
-        messages.success(request, str(items_count))
-        Dl.CloseConnection()
+    if 'user' in request.session:
+        val = request.COOKIES.get('catcookie', 'default')
+        Dl = DAL.Dal()
+        result = []
+        if val != 'default':
+            result = Dl.getAllProducts()
+            result = [x for x in result if x.category.find(val) != -1]
+            items_count = Dl.getCartitemslength(int(request.session['user']))
+            messages.success(request, str(items_count))
+            Dl.CloseConnection()
+        else:
+            print("Failed")
+        return render(request, 'Customer\Panel.html', {'allproducts': result, 'SearchValue': val})
     else:
-        print("Failed")
-    return render(request, 'Customer\Panel.html', {'allproducts': result, 'SearchValue': val})
+        return redirect('login')
 
 
 def login(request):
@@ -154,11 +160,11 @@ def register(request):
 
 
 def userpanel(request):
-    DL = DAL.Dal()
-    All_products = DL.getAllProducts()
-    items_count = DL.getCartitemslength(int(request.session['user']))
-    DL.CloseConnection()
     if 'user' in request.session:
+        DL = DAL.Dal()
+        All_products = DL.getAllProducts()
+        items_count = DL.getCartitemslength(int(request.session['user']))
+        DL.CloseConnection()
         messages.success(request, str(items_count))
         return render(request, 'Customer\Panel.html', {'allproducts': All_products, 'SearchValue': "Our Products"})
     else:
@@ -217,7 +223,7 @@ def Cart(request):
         total_sum = 0
         for prod in All_products:
             total_sum = total_sum + prod.getprice()
-
+        Dl.CloseConnection()
         return render(request, 'Customer/Cart.html',
                       {'cartproducts': All_products, 'Totalsum': total_sum, 'Sumwithshipping': total_sum + 50})
     else:
@@ -230,6 +236,7 @@ def removefromcart(request):
             prodid = request.POST['productid']
             Dl = DAL.Dal()
             Dl.Remove_From_Cart(int(request.session['user']), int(prodid))
+            Dl.CloseConnection()
             return redirect("Cart")
     else:
         return redirect('login')
@@ -260,18 +267,20 @@ def checkout(request):
         subtotal = 0
         if val != 'default':
             cart_products = filterstring(val)
-            if request.method=='POST':
+            if request.method == 'POST':
                 street_addr = request.POST['st_address']
                 city = request.POST['city']
                 phone = request.POST['Phone']
 
-                Full_addr=street_addr+"  "+city
-                #get value and insert order
-                Dl=DAL.Dal()
-                price_index=len(cart_products)-1
-                order_id=Dl.addorder(int(request.session['user']),Full_addr,int(phone),'Pending Confirmation',cart_products[price_index])
+                Full_addr = street_addr + "  " + city
+                Dl = DAL.Dal()
+                price_index = len(cart_products) - 1
+                order_id = Dl.addorder(int(request.session['user']), Full_addr, int(phone), 'Pending Confirmation',
+                                       cart_products[price_index])
                 for i in range(price_index):
-                    Dl.addorderdetails(order_id,cart_products[i])
+                    Dl.addorderdetails(order_id, cart_products[i])
+                Dl.Empty_Cart(int(request.session['user']))
+                Dl.CloseConnection()
                 return redirect('manageorders')
             else:
                 subtotal = cart_products[len(cart_products) - 1]
@@ -282,6 +291,7 @@ def checkout(request):
         return redirect('login')
 
 
+# filter string to retrieve the required values for products
 def filterstring(str):
     tempstr = ""
     lis = []
@@ -304,9 +314,78 @@ def filterstring(str):
     return lis
 
 
+def cancelorder(request):
+    if 'user' in request.session:
+        val = request.COOKIES.get('ordercookie', 'default')
+        Dl = DAL.Dal()
+        if val != 'default':
+            Dl.cancel_order(int(val))
+            Dl.CloseConnection()
+            return redirect('manageorders')
+        else:
+            print("Failed")
+        return redirect('manageorders')
+    else:
+        return redirect('login')
+
+
 def manageorders(request):
     if 'user' in request.session:
-        return render(request, "Customer/manageOrder.html")
+        Dl = DAL.Dal()
+        order_list = Dl.get_orders(int(request.session['user']))
+        productslist = []
+        buttons_list = []
+        for order in order_list:
+            products_ids = Dl.get_order_products(order.orderid)
+            Allproducts = Dl.getAllProducts()
+            for product in Allproducts:
+                for id in products_ids:
+                    if product.prodid == id:
+                        productslist.append(product)
+            for prod in productslist:
+                if order.products == '':
+                    order.products = prod.prodname
+                else:
+                    order.products = order.products + "," + prod.prodname
+            if order.order_Status == 'Pending Confirmation':
+                btn = Btn("Cancel Order", "", "#bf1c3d")
+                buttons_list.append(btn)
+            elif order.order_Status == 'Shipped':
+                btn = Btn("Cancel Order", "hidden", "#bf1c3d")
+                buttons_list.append(btn)
+            elif order.order_Status == 'Cancelled':
+                btn = Btn("", "hidden", "#bf1c3d")
+                buttons_list.append(btn)
+            else:
+                btn = Btn("Add/Edit Review", "", "#1cbf34")
+                buttons_list.append(btn)
+        order_list = zip(order_list, buttons_list)
+        Dl.CloseConnection()
+        return render(request, "Customer/manageOrder.html", {'orderslist': order_list})
+    else:
+        return redirect('login')
+
+
+def addeditreview(request):
+    if 'user' in request.session:
+        if request.method == 'POST':
+            review_txt = request.POST['reviewtext']
+            val = request.COOKIES.get('ordercookie', 'default')
+            if val != 'default':
+                Dl = DAL.Dal()
+                result = Dl.add_editReview(int(request.session['user']), val, review_txt)
+                Dl.CloseConnection()
+                if result == 0:
+                    messages.success(request, "Review Addded SuccessFully")
+                else:
+                    messages.success(request, "Review Updated SuccessFully")
+                return render(request, "Customer/Reviews.html")
+            else:
+                print("Failed")
+                messages.error(request,"")
+                return render(request, "Customer/Reviews.html")
+        else:
+            return render(request, "Customer/Reviews.html")
     else:
         return redirect('login')
 
@@ -326,6 +405,7 @@ def DeleteAccount(request):
                 else:
                     dal.deleteAccount(int(request.session['user']))
                     request.session.flush()
+                    dal.CloseConnection()
                     return redirect('login')
         return render(request, "Customer/DeleteAccount.html")
     else:

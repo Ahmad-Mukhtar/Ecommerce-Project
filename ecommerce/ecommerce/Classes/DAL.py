@@ -1,6 +1,7 @@
 from .DBCONNECTION import DBConnection
 from .Products import products
 from .Customer import customer
+from .Orders import Order
 
 
 class Dal:
@@ -56,9 +57,9 @@ class Dal:
         self.db.closeConnection()
         return result
 
-    def addtoCart(self, custid,productid):
+    def addtoCart(self, custid, productid):
         query = "Insert into Cart values(?,?)"
-        values = (productid,custid)
+        values = (productid, custid)
         self.db.cursor.execute(query, values)
         self.db.cons.commit()
         if self.db.cursor.rowcount > 0:
@@ -76,17 +77,26 @@ class Dal:
         else:
             return 0
 
-    def getCart(self, Cust_Id,Prod_id):
+    def getCart(self, Cust_Id, Prod_id):
         query = "select * from Cart where customerId=? and productId=?"
-        values=(Cust_Id,Prod_id)
+        values = (Cust_Id, Prod_id)
         self.db.cursor.execute(query, values)
         result = self.db.cursor.fetchone()
         return result
 
-    def Remove_From_Cart(self, Cust_Id,Prod_id):
+    def Remove_From_Cart(self, Cust_Id, Prod_id):
         query = "Delete from Cart where customerId=? and productId=?"
-        values=(Cust_Id,Prod_id)
+        values = (Cust_Id, Prod_id)
         self.db.cursor.execute(query, values)
+        self.db.cons.commit()
+        if self.db.cursor.rowcount > 0:
+            return 1
+        else:
+            return 0
+
+    def Empty_Cart(self, Cust_Id):
+        query = "Delete from Cart where customerId=?"
+        self.db.cursor.execute(query, Cust_Id)
         self.db.cons.commit()
         if self.db.cursor.rowcount > 0:
             return 1
@@ -99,20 +109,48 @@ class Dal:
         result = self.db.cursor.fetchall()
         return len(result)
 
-    def addorder(self,cust_id,addr,phoneno,order_status,price):
+    def addorder(self, cust_id, addr, phoneno, order_status, price):
         proc_query = """\
                    DECLARE @out int;
                     EXEC [dbo].[insert_order] @cust_id= ?,@addr=?,@status=?,@phno=?,@price=?, @flag=@out OUTPUT;
                     SELECT @out AS the_output;
                    """
-        values = (cust_id,addr,order_status,phoneno,price)
+        values = (cust_id, addr, order_status, phoneno, price)
         result = self.db.executeproc(proc_query, values)
         return result
 
-    def addorderdetails(self,order_id,product_id):
+    def addorderdetails(self, order_id, product_id):
         query = "Insert into orders values(?,?)"
         values = (order_id, product_id)
         self.db.cursor.execute(query, values)
+        self.db.cons.commit()
+        if self.db.cursor.rowcount > 0:
+            return 1
+        else:
+            return 0
+
+    def get_orders(self, cust_id):
+        query = "select * from user_Order where custId=?"
+        self.db.cursor.execute(query, cust_id)
+        result = self.db.cursor.fetchall()
+        orders_list = []
+        for order in result:
+            user_order = Order(order[0], order[1], order[2], order[3], order[4], order[5])
+            orders_list.append(user_order)
+        return orders_list
+
+    def get_order_products(self, order_id):
+        query = "select prodtsId from orders where orderid=?"
+        self.db.cursor.execute(query, order_id)
+        result = self.db.cursor.fetchall()
+        prodids_list = []
+        for ids in result:
+            prodids_list.append(int(ids[0]))
+        return prodids_list
+
+    def cancel_order(self, orderid):
+        query = "update user_Order set order_status='Cancelled' where order_id=?"
+        self.db.cursor.execute(query, orderid)
         self.db.cons.commit()
         if self.db.cursor.rowcount > 0:
             return 1
@@ -141,6 +179,28 @@ class Dal:
             return 1
         else:
             return 0
+
+    def add_editReview(self, cust_id, order_id, review_txt):
+        # Add review
+        flag = 0
+        query = "select * from Reviews where OrderId=? and CustId=?"
+        values = (order_id, cust_id)
+        self.db.cursor.execute(query, values)
+        result = self.db.cursor.fetchall()
+        if len(result) == 0:
+            print("Iam None")
+            query = "Insert into Reviews values(?,?,?)"
+            values = (cust_id, review_txt, order_id)
+            self.db.cursor.execute(query, values)
+            self.db.cons.commit()
+            return flag
+        else:
+            query = "Update Reviews set CustReview=? where CustId=? and OrderId=?"
+            values = (review_txt, cust_id, order_id)
+            self.db.cursor.execute(query, values)
+            self.db.cons.commit()
+            flag = 1
+            return flag
 
     def getAlluseremails(self):
         query = "Select email from Customer_table"

@@ -1,6 +1,5 @@
 <!doctype html>
 {% load static %}
-
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -26,65 +25,73 @@
     <body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-            <div class="header_img ">
-                <a class="point" href="{% url 'Cart' %}"><i class="nav_logo-icon">
-        <i class="fa fa-shopping-cart"></i>
+            <div class="header_img">
+                <i class="nav_logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                    </svg>
                 </i>
-                    {% for message in messages %}
-                    <h6 style="
-    margin-top: -27px;
-    margin-left: 7px;
-    margin-bottom: 147px;
-    color: #4947fc;
-">{{message}}</h6>
-                    {% endfor%}
-                </a>
             </div>
         </header>
         <div class="l-navbar neonBox-red" id="nav-bar">
             <nav class="nav">
                 <div>
-                    <a href="{% url 'DashBoard' %}" class="nav_logo">
+                    <a href="#" class="nav_logo">
                         <i class='bx bx-home-alt nav_logo-icon'></i> <span class="nav_logo-name">Customer Panel</span>
                     </a>
                     <div class="nav_list">
-                        <a href="{% url 'DashBoard' %}" class="nav_link active">
+
+                        <a href="dashboard.html" class="nav_link active">
                             <div class="icons-temp">
                                 <i class='bx bx-grid-alt nav_icon'></i>
                             </div>
                             <span class="nav_name">Dashboard</span>
                         </a>
-                        <a href="{% url 'UpdateProfile' %}" class="nav_link">
+                        <a href="#" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-user nav_icon'></i>
                             </div>
                             <span class="nav_name">Update Information</span>
                         </a>
-                        <a href="{% url 'Categories' %}" class="nav_link">
+                        <a href="#" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-grid-alt nav_icon'></i>
                             </div>
                             <span class="nav_name">Display Categories</span>
-
                         </a>
-
-
-                        <a href="{% url 'manageorders' %}" class="nav_link">
+                        <a href="adminProduct.html" class="nav_link">
                             <div class="icons-temp">
                                 <i class='fa fa-shopping-cart'></i>
                             </div>
                             <span class="nav_name">View Orders</span>
                         </a>
+                        <a href="adminProduct.html" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='fa fa-shopping-cart'></i>
+                            </div>
+                            <span class="nav_name">Proceed to Cart</span>
+                        </a>
 
-                        <a href="{% url 'DeleteAccount' %}" class="nav_link">
+                        <a href="adminProduct.html" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='fa fa-comments'></i>
+                            </div>
+                            <span class="nav_name">Post review</span>
+                        </a>
+                        <a href="adminProduct.html" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-user nav_icon'></i>
                             </div>
                             <span class="nav_name">Delete Account</span>
                         </a>
 
+
+
+
+
                     </div>
-                </div>  <a href="{% url 'logout' %}" class="nav_link">
+                </div>  <a href="#" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-log-out nav_icon'></i>
                             </div>
@@ -94,60 +101,52 @@
         </div>
 
         <!--Container Main start-->
-        <div class="mainArea" style="color: black;">
+       <div class="mainArea" style="color: black;">
             <div class="container">
-                <div class="row">
-                <div class="col-6">
-                    <h2 style="color: black; margin-top:85px;">{{SearchValue}}</h2>
-                    <br>
+                <div style="text-align: right;">
+
                 </div>
-                <div style="text-align: right; margin-top:50px;" class="col-6">
-                    <form action="searchinpanel" method="get">
-                        <br>
-                        <input type="text" placeholder="Search" name="searchbox" style="padding: 10px; border: none; border-radius: 10px; width: 45%;">
-                        <button type="submit" class="point" style="padding: 10px; border : 2px solid #2b75ff; background-color: transparent; color: #2b75ff; border-radius: 10px; padding-top: 5px; padding-bottom: 5px;"><b><i class='bx bx-search'></i></b></button>
-                    </form>
-                    <div>
-                            <a href="{% url 'AdvancedSearch' %}">
-                        <button type="button" class="point" style="background-color: #2b75ff00;/* color: #2b75ff; *//* border-radius: 18px; *//* color: white; */border:none;/* padding: 20px; *//* padding-top: 10px; *//* padding-bottom: 10px; */margin: 7px 165px;"><b>Advanced Search</b></button>
-                        </a>
+                </div>
+
+                <section id="top" style=" padding-bottom:120px; margin-bottom:10px;  color: #000000; font-style: normal;">
+                    <div class="container">
+                        <div class="row" >
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-8">
+            <br><br><br>
+                                <h1 style="  text-align:center ; font-family: 'Open Sans', sans-serif; color: #2b75ff;">Order review</h1>
+                                <hr style="height:2px;border-width:0;color:gray;background-color:gray ;  margin-top:30px; ">
+
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                        </div>
+                <form action="addeditreview" method="post">
+                               {% csrf_token %}
+                        <textarea name="reviewtext" placeholder="Enter Review..." style="height: 200px"></textarea>
+
+
+                        <button type="submit" name="submitreview" class="point" style="float: right; background-color: #2b75ff; color: #2b75ff; border-radius: 5px; color: white; border:none; padding: 20px; padding-top: 10px; padding-bottom: 10px;">
+                        Submit
+                        </button>
+                    {% for message in messages %}
+                      <p class="alert alert-success" style="width:22%;">{{message}}</p>
+                     {% endfor%}
+
+                        </form>
+
+
                     </div>
-                </div>
-                </div>
+                </section>
+                <br><br><br><br>
+
+
             </div>
             <br><br>
-
-            <br><br><br>
-        </div>
-
-
-        <div class="container d-flex justify-content-center mt-50 mb-50">
-
-            <div class="row">
-            {% for product in allproducts %}
-            <div class="col-md-4 mt-2">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-img-actions"> <img src="{% static 'Images/lapimg.jpg' %}" class="card-img img-fluid" width="96" height="250" alt=""> </div>
-                    </div>
-                    <div class="card-body bg-light text-center">
-                        <div class="mb-2">
-                            <h6 class="font-weight-semibold mb-2"> <a href="#" class="text-default mb-2" data-abc="true" style="color:black;">{{product.prodname}}</a> </h6> <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
-                        </div>
-                        <h5 class="mb-0 font-weight-semibold" style="color:black;">Rs {{product.getprice}}</h5>
-                        <div class="text-muted mb-3">34 reviews</div>
-
-                        <button type="submit" class="btn bg-cart" value="{{product.prodid}}" onclick="addtocart(this)"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-
-                    </div>
-                </div>
-            </div>
-            {% endfor%}
-        </div>
-    </div>
-
-
-
+            
 <script>
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
@@ -235,23 +234,9 @@ type: 'radar',
         <!--Container Main end-->
         <!-- main-area-end -->
 
-<script>
-    function addtocart(prodId)
-    {
-            var d = new Date();
-            d.setTime(d.getTime() + (10*1000));
-            var expires = "expires=" + d.toUTCString();
-            var s = "prodcookie";
-            document.cookie = s + "=" + prodId.value + ";" + expires + ";path=/Addtocart";
-            console.log(document.cookie);
-            var url="{% url 'Addtocart' %}";
-            document.location.href =url
 
-    };
-</script>
 		<!-- JS here -->
         <script src="https://themebeyond.com/html/geco/Geco/js/bootstrap.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="{% static 'js/product.js' %}"></script>
     </body>
 </html>
