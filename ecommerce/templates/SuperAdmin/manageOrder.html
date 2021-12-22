@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 {% load static %}
 <html lang="en">
     <head>
@@ -12,7 +12,7 @@
         <!-- Place favicon.ico in the root directory -->
 
 		<!-- CSS here -->
-        <link rel="stylesheet" href="https://themebeyond.com/html/geco/Geco/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://themebeyond.com/html/geco/Geco/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/admin.css' %}">
         <link rel="stylesheet" href="https://themebeyond.com/html/geco/Geco/css/responsive.css">
@@ -35,45 +35,36 @@
             </div>
         </header>
         <div class="l-navbar neonBox-red" id="nav-bar">
-            <nav class="nav">
+             <nav class="nav">
                 <div>
-                    <a href="{% url 'DashBoard' %}" class="nav_logo">
-                        <i class='bx bx-home-alt nav_logo-icon'></i> <span class="nav_logo-name">Customer Panel</span>
+                    <a href="#" class="nav_logo">
+                        <i class='bx bx-home-alt nav_logo-icon'></i> <span class="nav_logo-name">Super Admin Panel</span>
                     </a>
                     <div class="nav_list">
-                        <a href="{% url 'DashBoard' %}" class="nav_link active">
-                            <div class="icons-temp">
-                                <i class='bx bx-grid-alt nav_icon'></i>
-                            </div>
-                            <span class="nav_name">Dashboard</span>
-                        </a>
-                        <a href="{% url 'UpdateProfile' %}" class="nav_link">
+                        <a href="{% url 'UpdateSuperAdmin' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-user nav_icon'></i>
                             </div>
                             <span class="nav_name">Update Information</span>
                         </a>
-                        <a href="{% url 'Categories' %}" class="nav_link">
-                            <div class="icons-temp">
-                                <i class='bx bx-grid-alt nav_icon'></i>
-                            </div>
-                            <span class="nav_name">Display Categories</span>
-
-                        </a>
-
-
-                        <a href="{% url 'manageorders' %}" class="nav_link">
+                        <a href="{% url 'manage_order_superadmin' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='fa fa-shopping-cart'></i>
                             </div>
-                            <span class="nav_name">View Orders</span>
+                            <span class="nav_name">Manage Orders</span>
                         </a>
-
-                        <a href="{% url 'DeleteAccount' %}" class="nav_link">
+                        <a href="{% url 'AddAdmin' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-user nav_icon'></i>
                             </div>
-                            <span class="nav_name">Delete Account</span>
+                            <span class="nav_name">Add Admin</span>
+                        </a>
+
+                        <a href="{% url 'RemoveAdmin' %}" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='bx bx-user nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Remove Admin</span>
                         </a>
 
                     </div>
@@ -84,87 +75,60 @@
                             <span class="nav_name">Log Out</span>
                         </a>
             </nav>
+
         </div>
+
 
         <!--Container Main start-->
         <div class="mainArea" style="color: black;">
-            <div class="container">
-                <div style="text-align: right;">
-                    <form action="" method="POST">
-                        <br>
-                        <input type=hidden placeholder="Search" name="search" style="padding: 10px; border: none; border-radius: 10px; width: 25%;">
-                    </form>
-                </div>
-                </div>
+            <div class="container"><br><br><br>
+                <h2 style="color: black;">Order List</h2><br><br><br>
+                <table class="table table-dark table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                          <th scope="col">Order ID</th>
+                          <th scope="col" style="width:1%">Customer ID</th>
+                          <th scope="col">Total Price</th>
+                           <th scope="col">Order Date</th>
+                          <th scope="col">Order Status</th>
+                            <th scope="col">Update Status</th>
+                          <th scope="col"> </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+            {% for order,btn in orderslist %}
 
-                <section id="top" style=" padding-bottom:120px;margin-top:30px; margin-bottom:10px;  color: #000000; font-style: normal;">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-2">
+                        <tr>
+                          <th scope="row">{{order.orderid}}</th>
+                          <td style="overflow: auto;width: 201px;word-break: break-all;">{{order.custid}}</td>
+                          <td>{{order.Totalprice}}</td>
+                            <td>{{order.order_date}}</td>
+                          <td>{{order.order_Status}}</td>
+                            <form action="Update_order_status" method="POST">
+                            <td>
+            <select id=status style="width: 50%;" name="order_status" class="form-control">
+                <option value="Pending Confirmation">Pending Confirmation</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Completed">Completed</option>
+            </select>
+</td>
+                            <td>
 
-                            </div>
-                            <div class="col-md-8">
+              {% csrf_token %}
+        <input type="hidden" value="{{order.orderid}}" name="order_id">
+        <button  type="submit" id="btn" {{btn.hidden}}  class="point" style="margin-left:-65px;background-color:#2B75FF;border-radius: 29px;color: white;border:none;padding: 3px 16px;" >Update Status</button>
 
-                                <h1 style="  text-align:center ; color:black; font-family: 'Open Sans', sans-serif;"> Delete Account</h1>
-                                <hr style="height:2px;border-width:0;color:gray;background-color:gray ;  margin-top:30px; ">
-
-                            </div>
-                            <div class="col-md-2">
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-
-                            </div>
-                            <div class="col-md-8">
-
-                                    <form action="DeleteAccount" method="POST">
-                                                     {% csrf_token %}
-                                <br><br>
-
-                                <b style="font-size:24px; ">Enter Password</b>
-                                <br><br>
-
-                                <input type="password" id="pass" name="pass" style=" word-wrap: break-word; box-sizing: border-box; margin: 0; font: inherit; font-family: inherit; font-size: inherit; line-height: inherit; border-radius: 3px; background-color: #ececec; border: 1px solid transparent; color: #3d3d3d; width: 50%; padding: 10px;">
-
-
-                                <br><br>
-
-                                <b style="font-size:24px; ">Confirm Password</b>
-                                <br><br>
-
-                                <input type="password" id="c_pass" name="confpass" style=" word-wrap: break-word; box-sizing: border-box; margin: 0; font: inherit; font-family: inherit; font-size: inherit; line-height: inherit; border-radius: 3px; background-color: #ececec; border: 1px solid transparent; color: #3d3d3d; width: 50%; padding: 10px;">
-
-                                <br><br>
-                                    <div class="done" style="margin-left:60px;">
-
-                                        <div>
-                            {% for message in messages %}
-                                <p class="alert alert-danger" style="width:50%; width: 55%;margin-left: -57px;">{{message}}</p>
-                            {% endfor%}
-                        </div>
-
-                                        <button type="submit" style=" width:150px;background-color: #2b75ff; color: #2b75ff; border-radius: 5px; color: white; border:none; padding: 20px; padding-top: 10px; padding-bottom: 10px;margin-left:-56px;"><b>Delete</b></button>
+                            </td>
+                            </form>
+                        </tr>
+                       {% endfor%}
 
 
-                                    </div>
-                                    </form>
-                            </div>
-                            <div class="col-md-2">
-
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-                <br><br><br><br>
-            
-
+                      </tbody>
+                  </table>
             </div>
-            <br><br>
-            
+        </div>
 <script>
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
@@ -254,7 +218,39 @@ type: 'radar',
 
 
 		<!-- JS here -->
+        <script>
+
+            function managorder(btn)
+            {
+
+                if(btn.innerHTML=='Cancel Order')
+                {
+                    var d = new Date();
+                    d.setTime(d.getTime() + (10*1000));
+                    var expires = "expires=" + d.toUTCString();
+                    var s = "ordercookie";
+                    document.cookie = s + "=" + btn.value + ";" + expires + ";path=/cancelorder";
+                    var url="{% url 'cancelorder' %}";
+                    document.location.href =url
+                }
+                else
+                {
+                     var d = new Date();
+                    d.setTime(d.getTime() + (3600*1000));
+                    var expires = "expires=" + d.toUTCString();
+                    var s = "ordercookie";
+                    document.cookie = s + "=" + btn.value + ";" + expires + ";path=/addeditreview";
+                    var url="{% url 'addeditreview' %}";
+                    document.location.href =url
+
+                }
+
+            }
+
+
+        </script>
         <script src="https://themebeyond.com/html/geco/Geco/js/bootstrap.min.js"></script>
-        <script src="{% static 'js/product.js' %}"></script>
+            <script src="{% static 'js/product.js' %}"></script>
+
     </body>
 </html>

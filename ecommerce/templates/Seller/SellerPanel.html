@@ -1,5 +1,6 @@
 <!doctype html>
 {% load static %}
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -32,49 +33,55 @@
                     <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
                     </svg>
                 </i>
+                 
             </div>
         </header>
         <div class="l-navbar neonBox-red" id="nav-bar">
-             <nav class="nav">
+            <nav class="nav">
                 <div>
-                    <a href="{% url 'DashBoard' %}" class="nav_logo">
-                        <i class='bx bx-home-alt nav_logo-icon'></i> <span class="nav_logo-name">Customer Panel</span>
+                    <a href="#" class="nav_logo">
+                        <i class='bx bx-home-alt nav_logo-icon'></i> <span class="nav_logo-name">Seller Panel</span>
                     </a>
                     <div class="nav_list">
-                        <a href="{% url 'DashBoard' %}" class="nav_link active">
+                        <a href="{% url 'SEllerDashBoard' %}" class="nav_link active">
                             <div class="icons-temp">
                                 <i class='bx bx-grid-alt nav_icon'></i>
                             </div>
                             <span class="nav_name">Dashboard</span>
                         </a>
-                        <a href="{% url 'UpdateProfile' %}" class="nav_link">
+                        <a href="{% url 'UpdateSellerProfile' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-user nav_icon'></i>
                             </div>
                             <span class="nav_name">Update Information</span>
                         </a>
-                        <a href="{% url 'Categories' %}" class="nav_link">
+                        <a href="{% url 'addProduct' %}" class="nav_link">
                             <div class="icons-temp">
-                                <i class='bx bx-grid-alt nav_icon'></i>
+                                <i class='bx bx-box nav_icon'></i>
                             </div>
-                            <span class="nav_name">Display Categories</span>
-
+                            <span class="nav_name">Add Product</span>
+                        </a>
+                        <a href="{% url 'RemoveProduct' %}" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='bx bx-box nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Remove Product</span>
+                        </a>
+                        
+                        <a href="{% url 'updateProduct' %}" class="nav_link">
+                            <div class="icons-temp">
+                                <i class='bx bx-box nav_icon'></i>
+                            </div>
+                            <span class="nav_name">Update Product</span>
                         </a>
 
-
-                        <a href="{% url 'manageorders' %}" class="nav_link">
-                            <div class="icons-temp">
-                                <i class='fa fa-shopping-cart'></i>
-                            </div>
-                            <span class="nav_name">View Orders</span>
-                        </a>
-
-                        <a href="{% url 'DeleteAccount' %}" class="nav_link">
+                        <a href="{% url 'DeleteSellerAccount' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-user nav_icon'></i>
                             </div>
                             <span class="nav_name">Delete Account</span>
                         </a>
+
 
                     </div>
                 </div>  <a href="{% url 'logout' %}" class="nav_link">
@@ -87,138 +94,46 @@
         </div>
 
         <!--Container Main start-->
-       <div class="mainArea" style="color: black;">
+        <div class="mainArea" style="color: black;">
             <div class="container">
-                <div style="text-align: right;">
-
+                <div class="row">
+                <div class="col-6">
+                    <h2 style="color: black; margin-top:85px;">Your Products</h2>
+                    <br>
+                </div>
+                <div style="text-align: right; margin-top:50px;" class="col-6">
                 </div>
                 </div>
-
-                <section id="top" style=" padding-bottom:120px; margin-bottom:10px;  color: #000000; font-style: normal;">
-                    <div class="container">
-                        <div class="row" >
-                            <div class="col-md-2">
-
-                            </div>
-                            <div class="col-md-8">
-            <br><br><br>
-                                <h1 style="  text-align:center ; font-family: 'Open Sans', sans-serif; color: #2b75ff;">Order review</h1>
-                                <hr style="height:2px;border-width:0;color:gray;background-color:gray ;  margin-top:30px; ">
-
-                            </div>
-                            <div class="col-md-2">
-
-                            </div>
-                        </div>
-                <form action="addeditreview" method="post">
-                               {% csrf_token %}
-                        <textarea name="reviewtext" placeholder="Enter Review..." style="height: 200px"></textarea>
-
-
-                        <button type="submit" name="submitreview" class="point" style="float: right; background-color: #2b75ff; color: #2b75ff; border-radius: 5px; color: white; border:none; padding: 20px; padding-top: 10px; padding-bottom: 10px;">
-                        Submit
-                        </button>
-                    {% for message in messages %}
-                      <p class="alert alert-success" style="width:22%;">{{message}}</p>
-                     {% endfor%}
-
-                        </form>
-
-
-                    </div>
-                </section>
-                <br><br><br><br>
-
-
             </div>
             <br><br>
-            
-<script>
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
+
+            <br><br><br>
+        </div>
 
 
-const data = {
-  labels: [
-    'Eating',
-    'Drinking',
-    'Sleeping',
-    'Designing',
-    'Coding',
-    'Cycling',
-    'Running'
-  ],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [65, 59, 90, 81, 56, 55, 40],
-    fill: true,
-    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-    borderColor: 'rgb(255, 99, 132)',
-    pointBackgroundColor: 'rgb(255, 99, 132)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgb(255, 99, 132)'
-  }, {
-    label: 'My Second Dataset',
-    data: [28, 48, 40, 19, 96, 27, 100],
-    fill: true,
-    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-    borderColor: 'rgb(54, 162, 235)',
-    pointBackgroundColor: 'rgb(54, 162, 235)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgb(54, 162, 235)'
-  }]
-};
-
-const ctx1 = document.getElementById('myChart1').getContext('2d');
-const myChart1 = new Chart(ctx1, {
-type: 'radar',
-  data: data,
-  options: {
-    elements: {
-      line: {
-        borderWidth: 3
-      }
-    }
-  },
-});
-</script>
-        <!--Container Main end-->
         <!-- main-area-end -->
+        <div class="container d-flex justify-content-center mt-50 mb-50">
+
+            <div class="row">
+            {% for product in allproducts %}
+            <div class="col-md-4 mt-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-img-actions"> <img src="{{product.prodimg}}" class="card-img img-fluid" width="96" height="250" alt=""> </div>
+                    </div>
+                    <div class="card-body bg-light text-center">
+                        <div class="mb-2">
+                            <h6 class="font-weight-semibold mb-2"> <a href="#" class="text-default mb-2" data-abc="true" style="color:black;">{{product.prodname}}</a> </h6> <a href="#" class="text-muted" data-abc="true"></a>
+                        </div>
+                        <h5 class="mb-0 font-weight-semibold" style="color:black;">Rs {{product.getprice}}</h5>
+
+                          </div>
+                </div>
+            </div>
+            {% endfor%}
+        </div>
+    </div>
+
 
 
 		<!-- JS here -->

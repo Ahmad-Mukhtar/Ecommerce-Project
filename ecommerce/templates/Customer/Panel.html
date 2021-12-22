@@ -128,17 +128,16 @@
             <div class="col-md-4 mt-2">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-img-actions"> <img src="{% static 'Images/lapimg.jpg' %}" class="card-img img-fluid" width="96" height="250" alt=""> </div>
+                        <div class="card-img-actions"> <img src="{{product.prodimg}}" class="card-img img-fluid" width="96" height="250" alt=""> </div>
                     </div>
                     <div class="card-body bg-light text-center">
                         <div class="mb-2">
-                            <h6 class="font-weight-semibold mb-2"> <a href="#" class="text-default mb-2" data-abc="true" style="color:black;">{{product.prodname}}</a> </h6> <a href="#" class="text-muted" data-abc="true">Laptops & Notebooks</a>
+                            <h6 class="font-weight-semibold mb-2"> <a href="#" class="text-default mb-2" data-abc="true" style="color:black;">{{product.prodname}}</a> </h6> <a href="#" class="text-muted" data-abc="true"></a>
                         </div>
                         <h5 class="mb-0 font-weight-semibold" style="color:black;">Rs {{product.getprice}}</h5>
-                        <div class="text-muted mb-3">34 reviews</div>
 
                         <button type="submit" class="btn bg-cart" value="{{product.prodid}}" onclick="addtocart(this)"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-
+                        <button type="submit" class="btn bg-cart" value="{{product.prodid}}" onclick="buynow(this)" style="margin-top: 20px;"><i class="fa fa-cart-arrow-down mr-2"></i>Buy now</button>
                     </div>
                 </div>
             </div>
@@ -246,8 +245,21 @@ type: 'radar',
             console.log(document.cookie);
             var url="{% url 'Addtocart' %}";
             document.location.href =url
-
     };
+
+     function buynow(prodId)
+    {
+            var d = new Date();
+            d.setTime(d.getTime() + (3600*1000));
+            var expires = "expires=" + d.toUTCString();
+            var s = "prodcookie";
+            document.cookie = s + "=" + prodId.value + ";" + expires + ";path=/BuyProduct";
+            console.log(document.cookie);
+            var url="{% url 'BuyProduct' %}";
+            document.location.href =url
+    };
+
+
 </script>
 		<!-- JS here -->
         <script src="https://themebeyond.com/html/geco/Geco/js/bootstrap.min.js"></script>

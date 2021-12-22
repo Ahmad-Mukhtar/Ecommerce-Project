@@ -36,53 +36,47 @@
         <div class="l-navbar neonBox-red" id="nav-bar">
             <nav class="nav">
                 <div>
-                    <a href="#" class="nav_logo">
+                    <a href="{% url 'DashBoard' %}" class="nav_logo">
                         <i class='bx bx-home-alt nav_logo-icon'></i> <span class="nav_logo-name">Customer Panel</span>
                     </a>
                     <div class="nav_list">
-
-                        <a href="dashboard.html" class="nav_link active">
+                        <a href="{% url 'DashBoard' %}" class="nav_link active">
                             <div class="icons-temp">
                                 <i class='bx bx-grid-alt nav_icon'></i>
                             </div>
                             <span class="nav_name">Dashboard</span>
                         </a>
-                        <a href="#" class="nav_link">
+                        <a href="{% url 'UpdateProfile' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-user nav_icon'></i>
                             </div>
                             <span class="nav_name">Update Information</span>
                         </a>
-                        <a href="#" class="nav_link">
+                        <a href="{% url 'Categories' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-grid-alt nav_icon'></i>
                             </div>
                             <span class="nav_name">Display Categories</span>
+
                         </a>
-                        <a href="adminProduct.html" class="nav_link">
+
+
+                        <a href="{% url 'manageorders' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='fa fa-shopping-cart'></i>
                             </div>
                             <span class="nav_name">View Orders</span>
                         </a>
 
-
-                        <a href="adminProduct.html" class="nav_link">
-                            <div class="icons-temp">
-                                <i class='fa fa-comments'></i>
-                            </div>
-                            <span class="nav_name">Post review</span>
-                        </a>
-                        <a href="adminProduct.html" class="nav_link">
+                        <a href="{% url 'DeleteAccount' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-user nav_icon'></i>
                             </div>
                             <span class="nav_name">Delete Account</span>
                         </a>
 
-
                     </div>
-                </div>  <a href="#" class="nav_link">
+                </div>  <a href="{% url 'logout' %}" class="nav_link">
                             <div class="icons-temp">
                                 <i class='bx bx-log-out nav_icon'></i>
                             </div>
@@ -181,7 +175,8 @@
             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
             <div class="row" style=" margin-bottom: 50px;  margin-top:70px;">
-                <div class="col-md-2">
+                <div class="col-md-2" style="color: red; margin-top: -51px;">
+                    <small id="errormsg" style="color: red;font-size: larger;font-weight: bold;font-style: italic; display:none;">*Cart is Empty</small>
 
                 </div>
                 <div class="col-md-4" style="text-align:right">
@@ -366,12 +361,13 @@ type: 'radar',
 
     function checkout(btnn)
     {
-
+        element_arr=document.querySelectorAll(".form-control")
+        if (element_arr.length!=0)
+        {
         var d = new Date();
         d.setTime(d.getTime() + (3600*1000));
         var expires = "expires=" + d.toUTCString();
         var s = "cartprodts";
-        element_arr=document.querySelectorAll(".form-control")
         var ids=""
         for (var i=0; i<element_arr.length; i++)
         {
@@ -382,6 +378,17 @@ type: 'radar',
         document.cookie = s + "=" + ids + ";" + expires + ";path=/checkout";
         var url="{% url 'checkout' %}";
         document.location.href =url
+        }
+        else
+        {
+        element=document.getElementById("errormsg")
+        element.style.display="block";
+
+
+
+
+
+        }
     }
 </script>
         <script src="https://themebeyond.com/html/geco/Geco/js/bootstrap.min.js"></script>
