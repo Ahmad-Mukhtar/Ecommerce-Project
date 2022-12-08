@@ -12,7 +12,7 @@ This is an ecommerce site where Customer can buy items of his choice and Seller 
 <pre>
   o Pyodbc (for sql server Connection).<br />
   o Django (framework)<br />
-  o Mssql (sql queries etc)<br />
+  o Mssql-django (sql queries etc)<br />
 </pre>
 •	After the installation of all the Libraries In the terminal go to the to the base folder where the file manage.py lies.<br />
 •	In the terminal run command python manage.py runserver.<br />
